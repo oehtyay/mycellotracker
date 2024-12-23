@@ -1,0 +1,126 @@
+body {
+    background-image: url('images/thisone.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    background-color: rgba(144, 163, 158, 1);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 10; 
+    height: auto;
+    width: 70%;
+    position: relative; 
+    box-shadow: 20px 20px 35px rgba(0, 0, 0, 0.5);
+    margin-top: 5vw;
+    margin-bottom: 5vw;
+    text-align: center;
+}
+
+@font-face {
+    font-family: boldFont;
+    src: url(fonts/Ubuntu-Bold.ttf);
+}
+
+@font-face {
+    font-family: lightFont;
+    src: url(fonts/Ubuntu-Light.ttf);
+}
+
+@font-face {
+    font-family: coolFont;
+    src: url(fonts//AguDisplay-Regular-VariableFont_MORF.ttf);
+}
+
+.title {
+    text-align: center;
+    font-family: coolFont;
+    font-size: 30px;
+    color: beige;
+}
+
+.bigText {
+    font-size: 5vw;
+    margin-top: -0.3em;
+    font-family: boldFont;
+    color: bisque;
+}
+
+.backgroundImage {
+    width: 100%;
+    height: auto;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 1vw;
+    opacity: 0.8;
+}
+
+button {
+    font-family: lightFont;
+    padding: 5%;
+    margin-bottom: 7%;
+    border-radius: 10px;
+    border: none;
+    background-color: darkcyan;
+    font-size: 2em;
+    color: aquamarine;
+}
+
+table {
+    width: 100%;
+    height: auto;
+    margin-top: 1vw;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: center; 
+    vertical-align: middle; 
+    padding: 10px; 
+    height: auto;
+}
+
+.pooper {
+    width: 33%;
+}
+
+.hey {
+    width: 50%;
+}
+.streakImage {
+    width: 100%;
+    height: auto;
+    padding-left: 2vw;
+}
+
+.number {
+    font-size: 5em;
+    color: orange;
+    font-family: boldFont;
+    padding-right: 4vw;
+}
+
+.average {
+    font-family: coolFont;
+    font-size: 3em;
+    color: lightblue;
+
+}
+
+.averageNum {
+    font-family: lightFont;
+    font-size: 2em;
+    color: lightblue;
+}
+
+#practiceTimer {
+    font-size: 2em;
+    font-family: lightFont;
+    color: lightblue;
+    margin-top: -4%;
+}
