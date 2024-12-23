@@ -10,7 +10,7 @@
         <div class="main">
             <p class="title">Welcome to</p>
             <p class="title bigText">My Cello Tracker</p>
-            <button id="myButton" onclick="StartPractice()">Log Practice</button>
+            <button id="myButton" onclick="StartPractice(); startPractice();">Log Practice</button>
             <p id="practiceTimer"></p>
             <table>
                 <td class="pooper">
@@ -19,7 +19,7 @@
                             <img src="images/firestreak.png" alt="streakImage" class="streakImage" />
                         </td>
                         <td class="hey">
-                            <p class="number">0</p>
+                            <p id="streakNum" class="number">0</p>
                         </td>
                     </table>
                 </td>
@@ -28,10 +28,11 @@
                 </td>
                 <td class="pooper">
                     <p class="average">Average daily practice:</p>
-                    <p class="averageNum">NaN Minutes</p>
+                    <p id="averagePracticeTimeDisplay" class="averageNum">NaN Minutes</p>
                 </td>
             </table>
         </div>
     </body>
     <script src="script.js"></script>
+    <script src="streak.js"></script>
 </html>
