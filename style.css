@@ -124,3 +124,14 @@ td {
     color: lightblue;
     margin-top: -4%;
 }
+
+.version {
+    font-family: lightFont;
+    font-size: 1vw;
+}
+
+#arrow {
+    width: 4vw;
+    height: auto;
+    padding-left: 2vw;
+}

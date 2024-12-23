@@ -62,6 +62,11 @@ function formatTime(time) {
     return time < 10 ? "0" + time : time;
 }
 
+function getCurrentDate() {
+    let today = new Date();
+    return today.toISOString().split('T')[0]; // '2024-12-23' format
+}
+
 // Load practice data from localStorage
 function loadPracticeData() {
     let totalPracticeTime = parseFloat(localStorage.getItem('totalPracticeTime')) || 0;
@@ -73,6 +78,10 @@ function loadPracticeData() {
 function savePracticeData(totalPracticeTime, startDate) {
     localStorage.setItem('totalPracticeTime', totalPracticeTime);
     localStorage.setItem('startDate', startDate);
+    if (localStorage.getItem('yesterdayAverage') === null) {
+        localStorage.setItem('yesterdayAverage', 0);
+        localStorage.setItem('dayChange', getCurrentDate());
+    }
 }
 
 // Calculate the average practice time per day since the start date
@@ -83,7 +92,14 @@ function calculateAveragePracticeTime() {
     let currentDate = new Date();
     let startDateObj = new Date(startDate);
     let daysDifference = Math.floor((currentDate - startDateObj) / (1000 * 3600 * 24)) + 1;
-    
+
+    if (getCurrentDate() !== localStorage.getItem('dayChange')) {
+        localStorage.setItem('dayChange', getCurrentDate())
+        if (daysDifference - 1 > 0) {
+            let newYesterdayValue = totalPracticeTime / (daysDifference - 1)
+            localStorage.setItem('yesterdayAverage', newYesterdayValue)
+        }
+    }
     return totalPracticeTime / daysDifference;
 }
 
@@ -93,6 +109,7 @@ function displayAveragePracticeTime() {
     let hours = Math.floor(averagePracticeTime / 60);
     let minutes = Math.round(averagePracticeTime % 60);
     document.getElementById('averagePracticeTimeDisplay').textContent = `${hours}h and ${minutes}min`;
+    updateArrow(averagePracticeTime);
 }
 
 // Initialize practice data if not already set
@@ -100,7 +117,6 @@ function initializePracticeData() {
     let { totalPracticeTime, startDate } = loadPracticeData();
     if (!startDate) {
         startDate = new Date().toISOString().split('T')[0]; // Set to YYYY-MM-DD format
-        totalPracticeTime = totalPracticeTime + trueseconds;
         savePracticeData(totalPracticeTime, startDate);
     }
 
@@ -116,5 +132,17 @@ function practiceAlert() {
     }
 }
 
+function updateArrow(newPracTime) {
+    const arrow = document.getElementById('arrow');
+    if (newPracTime > localStorage.getItem('yesterdayAverage')) {
+        arrow.src = 'images/greenarrow.png';
+    } else if (newPracTime < localStorage.getItem('yesterdayAverage')) {
+        arrow.src = 'images/redarrow.png';
+    } else if (newPracTime = localStorage.getItem('yesterdayAverage')) {
+        arrow.src = 'images/equal.png';
+    }
+}
+
 // Call this on page load to ensure practice data is initialized
 window.onload = initializePracticeData();
+
