@@ -41,7 +41,7 @@ body {
 .title {
     text-align: center;
     font-family: coolFont;
-    font-size: 30px;
+    font-size: 2.3vw;
     color: beige;
 }
 
@@ -63,11 +63,10 @@ body {
 button {
     font-family: lightFont;
     padding: 5%;
-    margin-bottom: 7%;
     border-radius: 10px;
     border: none;
     background-color: darkcyan;
-    font-size: 2em;
+    font-size: 2vw;
     color: aquamarine;
 }
 
@@ -96,10 +95,11 @@ td {
     width: 100%;
     height: auto;
     padding-left: 2vw;
+    min-width: 25px;
 }
 
 .number {
-    font-size: 5em;
+    font-size: 6vw;
     color: orange;
     font-family: boldFont;
     padding-right: 4vw;
@@ -107,19 +107,19 @@ td {
 
 .average {
     font-family: coolFont;
-    font-size: 3em;
+    font-size: 3vw;
     color: lightblue;
 
 }
 
 .averageNum {
     font-family: lightFont;
-    font-size: 2em;
+    font-size: 3vw;
     color: lightblue;
 }
 
 #practiceTimer {
-    font-size: 2em;
+    font-size: 2vw;
     font-family: lightFont;
     color: lightblue;
     margin-top: -4%;
