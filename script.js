@@ -92,8 +92,6 @@ function displayAveragePracticeTime() {
     let averagePracticeTime = calculateAveragePracticeTime();
     let hours = Math.floor(averagePracticeTime / 60);
     let minutes = Math.round(averagePracticeTime % 60);
-    console.log(hours)
-    console.log(minutes)
     document.getElementById('averagePracticeTimeDisplay').textContent = `${hours}h and ${minutes}min`;
 }
 
@@ -102,7 +100,7 @@ function initializePracticeData() {
     let { totalPracticeTime, startDate } = loadPracticeData();
     if (!startDate) {
         startDate = new Date().toISOString().split('T')[0]; // Set to YYYY-MM-DD format
-        totalPracticeTime = totalPracticeTime + trueseconds
+        totalPracticeTime = totalPracticeTime + trueseconds;
         savePracticeData(totalPracticeTime, startDate);
     }
 
@@ -114,7 +112,7 @@ function practiceAlert() {
     if (confirm('You practiced for ' + hours + ' hours, ' + minutes + ' minutes, and ' + seconds + ' seconds. Take me to another person to confirm!')) {
         initializePracticeData();
     } else {
-        console.log('no');
+        trueseconds = 0;
     }
 }
 
