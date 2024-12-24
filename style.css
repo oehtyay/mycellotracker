@@ -60,7 +60,7 @@ body {
     opacity: 0.8;
 }
 
-button {
+#myButton {
     font-family: lightFont;
     padding: 5%;
     border-radius: 10px;
@@ -73,7 +73,6 @@ button {
 table {
     width: 100%;
     height: auto;
-    margin-top: 1vw;
     border-collapse: collapse;
 }
 
@@ -106,15 +105,15 @@ td {
 }
 
 .average {
-    font-family: coolFont;
+    font-family: lightFont;
     font-size: 3vw;
     color: lightblue;
 
 }
 
 .averageNum {
-    font-family: lightFont;
-    font-size: 3vw;
+    font-family: boldFont;
+    font-size: 2.5vw;
     color: lightblue;
 }
 
@@ -131,7 +130,90 @@ td {
 }
 
 #arrow {
-    width: 4vw;
+    width: 3vw;
     height: auto;
-    padding-left: 2vw;
+}
+
+.records {
+    width: 50%;
+    font-family: lightFont;
+    font-size: 2vw;
+    color: bisque;
+}
+
+.recordDay {
+    font-size: 1vw;
+}
+
+.recordTime {
+    font-family: boldFont;
+}
+
+.arrowHolder {
+    width: 5%;
+}
+
+.tableTime {
+    margin-top: -2em;
+}
+
+.intro {
+    position: inherit;
+}
+
+.bigText2 {
+    padding-top: 0.5em;
+}
+
+input {
+    width: 40%;
+    height: 3vw;
+    font-size: 2vw;
+    font-family: coolFont;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 2vw;
+}
+
+.introYes {
+    font-family: lightFont;
+    font-size: 2.5vw;
+    color: beige;
+}
+
+.para {
+    font-family: lightFont;
+    font-size: 1.5vw;
+    color: beige;
+    line-height: 1.75;
+}
+
+.happy {
+    font-family: boldFont;
+    font-size: 1.5vw;
+    color: beige;
+}
+
+.submitName {
+    font-family: lightFont;
+    padding: 2%;
+    border-radius: 10px;
+    border: none;
+    background-color: darkcyan;
+    font-size: 2vw;
+    color: aquamarine;
+    width: 30%;
+}
+
+.erase {
+    position: absolute;
+    width: 10%;
+    height: 3%;
+    border-radius: 10px;
+    border: none;
+    font-family: boldFont;
+    background-color: crimson;
+    color: darkred;
+    margin-left: 37.5%;
+    font-size: 1vw;
 }

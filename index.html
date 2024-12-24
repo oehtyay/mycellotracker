@@ -8,7 +8,8 @@
     </head>
     <body>
         <div class="main">
-            <p class="title">Welcome to</p>
+            <button onclick="eraseData()" class="erase">Erase Data</button>
+            <p id="title" class="title">Welcome to</p>
             <p class="title bigText">My Cello Tracker</p>
             <button id="myButton" onclick="StartPractice(); startPractice();">Log Practice</button>
             <p id="practiceTimer">00:00:00</p>
@@ -27,13 +28,32 @@
                     <img src="images/image_2024-12-23_121812946_enhanced.png" alt="backgroundImage" class="backgroundImage" />
                 </td>
                 <td class="pooper">
-                    <p class="average">Average daily practice:<img src="images/equal.png" alt="equal" id="arrow" /></p>
-                    <p id="averagePracticeTimeDisplay" class="averageNum">NaNh and NaNmin</p>
+                    <p class="average">Average daily:</p>
+                    <table class="tableTime">
+                        <td>
+                            <p id="averagePracticeTimeDisplay" class="averageNum">NaNh and NaNmin</p>
+                        </td>
+                        <td class="arrowHolder">
+                            <img src="images/equal.png" alt="equal" id="arrow" />
+                        </td>
+                    </table>
                 </td>
             </table>
-            <p class="version">Version 1.0.4</p>
+            <table>
+                <td class="records">
+                    <p>Longest Practice Session:</p>
+                    <p id="recordTime" class="recordTime">-</p>
+                    <p id="dayPractice" class="recordDay"></p>
+                </td>
+                <td class="records">
+                    <p>Longest Practice Streak:</p>
+                    <p id="recordStreak" class="recordTime">-</p>
+                    <p id="dayStreak" class="recordDay"></p>
+                </td>
+            </table>
+            <p class="version">Version 1.1.0</p>
         </div>
     </body>
     <script src="script.js"></script>
     <script src="streak.js"></script>
-</html>s
+</html>

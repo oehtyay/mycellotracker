@@ -48,9 +48,8 @@ function startTimer() {
 function stopTimer() {
     clearInterval(timerInterval);
 
-    // Save total practice time
     let { totalPracticeTime, startDate } = loadPracticeData();
-    totalPracticeTime += trueseconds / 60; // Add current session time to total practice time
+    totalPracticeTime += trueseconds / 60; 
     savePracticeData(totalPracticeTime, startDate);
 
     hours = 0;
@@ -64,17 +63,23 @@ function formatTime(time) {
 
 function getCurrentDate() {
     let today = new Date();
-    return today.toISOString().split('T')[0]; // '2024-12-23' format
+    return today.toISOString().split('T')[0]; 
 }
 
-// Load practice data from localStorage
+function getDate() {
+    let recordDate = new Date();
+    let day = recordDate.getDate();
+    let month = recordDate.getMonth() + 1;
+    let year = recordDate.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
 function loadPracticeData() {
     let totalPracticeTime = parseFloat(localStorage.getItem('totalPracticeTime')) || 0;
     let startDate = localStorage.getItem('startDate') || null;
     return { totalPracticeTime, startDate };
 }
 
-// Save the updated practice data to localStorage
 function savePracticeData(totalPracticeTime, startDate) {
     localStorage.setItem('totalPracticeTime', totalPracticeTime);
     localStorage.setItem('startDate', startDate);
@@ -84,7 +89,6 @@ function savePracticeData(totalPracticeTime, startDate) {
     }
 }
 
-// Calculate the average practice time per day since the start date
 function calculateAveragePracticeTime() {
     let { totalPracticeTime, startDate } = loadPracticeData();
     if (!startDate) return 0;
@@ -103,7 +107,6 @@ function calculateAveragePracticeTime() {
     return totalPracticeTime / daysDifference;
 }
 
-// Display the average practice time per day
 function displayAveragePracticeTime() {
     let averagePracticeTime = calculateAveragePracticeTime();
     let hours = Math.floor(averagePracticeTime / 60);
@@ -112,20 +115,19 @@ function displayAveragePracticeTime() {
     updateArrow(averagePracticeTime);
 }
 
-// Initialize practice data if not already set
 function initializePracticeData() {
     let { totalPracticeTime, startDate } = loadPracticeData();
     if (!startDate) {
-        startDate = new Date().toISOString().split('T')[0]; // Set to YYYY-MM-DD format
+        startDate = new Date().toISOString().split('T')[0];
         savePracticeData(totalPracticeTime, startDate);
     }
 
+    displayRecords();
     displayAveragePracticeTime();
 }
 
-// New practice alert function
 function practiceAlert() {
-    if (confirm('You practiced for ' + hours + ' hours, ' + minutes + ' minutes, and ' + seconds + ' seconds. Take me to another person to confirm!')) {
+    if (confirm('You practiced for ' + hours + ' hours, ' + minutes + ' minutes, and ' + seconds + ' seconds. Is this correct?')) {
         initializePracticeData();
     } else {
         trueseconds = 0;
@@ -143,6 +145,67 @@ function updateArrow(newPracTime) {
     }
 }
 
-// Call this on page load to ensure practice data is initialized
-window.onload = initializePracticeData();
+function calculateRecordTime(seconds) {
+    let totalMinutes = Math.round(seconds / 60);
+    let hours = Math.floor(totalMinutes / 60);
+    let minutes = totalMinutes % 60;
+    return `${hours}h and ${minutes}min`;
+}
+
+function displayRecords() {
+    if (localStorage.getItem('recordTime') === null) {
+        localStorage.setItem('recordTime', 0);
+        localStorage.setItem('pracDate', "Let's start to Practice!");
+        localStorage.setItem('recordStreak', 0);
+        localStorage.setItem('streakDate', 'Start a new Streak!');
+    }
+
+    const displayRecord = document.getElementById("recordTime");
+    const displayDay = document.getElementById('dayPractice');
+
+    if (trueseconds > localStorage.getItem('recordTime')) {
+        localStorage.setItem('recordTime', trueseconds);
+        localStorage.setItem('pracDate', getDate());
+        displayRecord.textContent = calculateRecordTime(localStorage.getItem('recordTime'));
+        displayDay.textContent = localStorage.getItem('pracDate');
+    } else {
+        displayRecord.textContent = calculateRecordTime(localStorage.getItem('recordTime'));
+        displayDay.textContent = localStorage.getItem('pracDate');
+    }
+
+    const displayStreakRecord = document.getElementById('recordStreak');
+    const displayStreakDay = document.getElementById('dayStreak');
+
+    if (localStorage.getItem('streak') > localStorage.getItem('recordStreak')) {
+        localStorage.setItem('recordStreak', localStorage.getItem('streak'));
+        localStorage.setItem('streakDate', getDate());
+        displayStreakRecord.textContent = `${localStorage.getItem('recordStreak')} Day(s)`;
+        displayStreakDay.textContent = localStorage.getItem('streakDate');
+    } else {
+        displayStreakRecord.textContent = `${localStorage.getItem('recordStreak')} Day(s)`;
+        displayStreakDay.textContent = localStorage.getItem('streakDate');
+    }
+}
+
+function checkName() {
+    if (localStorage.getItem('username') === null) {
+        window.location.href = 'assignName.html';
+    } else {
+        document.getElementById('title').textContent = `Welcome, ${localStorage.getItem('username')}`;
+        initializePracticeData();
+    }
+}
+
+function eraseData() {
+    if (confirm('Are you sure you want to erase all data on this device? This cannot be undone.')) {
+        localStorage.clear();
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    } else {
+
+    }
+}
+
+window.onload = checkName();
 
