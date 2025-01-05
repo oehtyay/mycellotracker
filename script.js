@@ -1,5 +1,32 @@
 var practiceActive = false;
 
+let wakeLock = null;
+
+async function requestWakeLock() {
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    console.log('Wake lock is active');
+    
+    // Reapply wake lock if the tab becomes visible again
+    document.addEventListener('visibilitychange', async () => {
+      if (wakeLock !== null && document.visibilityState === 'visible') {
+        wakeLock = await navigator.wakeLock.request('screen');
+      }
+    });
+  } catch (err) {
+    console.error('Failed to activate wake lock:', err);
+  }
+}
+
+// Call this function to release the wake lock if needed
+function releaseWakeLock() {
+  if (wakeLock) {
+    wakeLock.release();
+    wakeLock = null;
+    console.log('Wake lock is released');
+  }
+}
+
 function StartPractice() {
     if (practiceActive == false) {
         var button = document.getElementById("myButton");
@@ -7,6 +34,7 @@ function StartPractice() {
         button.style.backgroundColor = "orangered";
         startTimer();
         practiceActive = true;
+        requestWakeLock();
     } else {
         var button = document.getElementById("myButton");
         button.textContent = "Log Practice";
@@ -14,6 +42,7 @@ function StartPractice() {
         practiceAlert();
         stopTimer();
         practiceActive = false;
+        releaseWakeLock();
     }
 }
 
@@ -206,6 +235,8 @@ function eraseData() {
 
     }
 }
+
+window.addEventListener('beforeunload', releaseWakeLock);
 
 window.onload = checkName();
 
